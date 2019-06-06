@@ -43,6 +43,7 @@ window.renderStatistics = function(ctx, players, times) {
     ctx.fillText('Список результатов:', CLOUD_X + GAP, CLOUD_Y + GAP * 2);
 
     var maxTime = getMaxElement(times);
+
     var getPlayerColor = function(players) {
         if (players === 'Вы') {
             return 'rgba(255, 0, 0, 1)';
@@ -53,29 +54,14 @@ window.renderStatistics = function(ctx, players, times) {
 
     for (var i = 0; i < players.length; i++) {
         var playerTime = Math.round(times[i]);
-        var barHeight = ((maxBarHeight * times[i]) / maxTime) * -1;
+        var barHeight = ((maxBarHeight * times[i]) / maxTime);
 
         ctx.fillStyle = getPlayerColor(players[i]);
-        ctx.fillRect(BAR_X + BAR_GAP * i, BAR_Y, BAR_WIDTH, barHeight);
+        ctx.fillRect(BAR_X + BAR_GAP * i, BAR_Y, BAR_WIDTH, barHeight * (-1));
 
         ctx.fillStyle = '#000';
-        ctx.fillText(playerTime, BAR_X + BAR_GAP * i, 70);
+        ctx.fillText(playerTime, BAR_X + BAR_GAP * i, BAR_Y - barHeight - GAP);
         ctx.fillText(players[i], BAR_X + BAR_GAP * i, BAR_TEXT_Y);
 
     }
-
-    // ctx.fillRect(BAR_X + BAR_GAP * 0, BAR_Y, BAR_WIDTH, 150);
-    // ctx.fillText('Вы', BAR_X + BAR_GAP * 0, BAR_TEXT_Y);
-
-    // ctx.fillRect(BAR_X + BAR_GAP * 1, BAR_Y, BAR_WIDTH, 150);
-    // ctx.fillText('Вы', BAR_X + BAR_GAP * 1, BAR_TEXT_Y);
-
-    // ctx.fillRect(BAR_X + BAR_GAP * 2, BAR_Y, BAR_WIDTH, 150);
-    // ctx.fillText('Вы', BAR_X + BAR_GAP * 2, BAR_TEXT_Y);
-
-    // ctx.fillRect(BAR_X + BAR_GAP * 3, BAR_Y, BAR_WIDTH, 150);
-    // ctx.fillText('Вы', BAR_X + BAR_GAP * 3, BAR_TEXT_Y);
-
-
-
 };
